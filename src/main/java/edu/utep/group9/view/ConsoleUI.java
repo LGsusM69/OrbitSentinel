@@ -4,22 +4,29 @@ import java.util.Scanner;
 
 public class ConsoleUI {
     
-    Scanner sc;
+    private Scanner sc;
+    private boolean running;
     
     public ConsoleUI() {
+        running = false;
         sc = new Scanner(System.in);
     }
     
     public void run() {
-        String input;
-        System.out.println("welcome to Orbit Sentinel");
-        while(true) {
-            System.out.println("What type of user are you?\n\t" +
-                "1) Scientist\n\t 2) Space agency representative\n\t" +
-                "3) Policymaker\n\t4) Administrator\n\t e) Exit");
-            input = sc.nextLine();
-            if(input.equals("e")) break;
-        
+        running = true;
+        int input;
+        System.out.println("welcome to Orbit Sentinel.");
+        mainMenu();
+        while(running) {
+            getInput();
+            processInput();
         }
     }
+    public void mainMenu() {
+        System.out.println("Main menu:\n\t" +
+                "1) Login\n\t" +
+                "2) Exit");
+    }
+    public void getInput() {}
+    public void processInput() {}
 }
