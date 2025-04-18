@@ -1,0 +1,9 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="OrbitSentinel" type="Application" factoryName="Application">
+    <option name="MAIN_CLASS_NAME" value="edu.utep.group9.RunSimulation" />
+    <module name="OrbitSentinel" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>
