@@ -26,8 +26,8 @@ public class UIController {
                 break;
             case "main0":
                 System.out.println("Exiting...");
-
                 ui.stop();
+                break;
             case "scientist1":
                 ui.trackSpaceMenu();
                 break;
@@ -37,6 +37,7 @@ public class UIController {
                 break;
             case "track-space1":
                 scientist.track("rocket", "all");
+                break;
         }
     }
 }

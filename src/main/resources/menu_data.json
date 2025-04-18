@@ -12,7 +12,9 @@
     {"Unknown": 4},
     {"Back": 0}
   ],
-  "assess": [
-    {}
+  "assess-orbit": [
+    {"Track objects in LEO": 1},
+    {"Asses if debris is still in orbit": 2},
+    {"Back": 0}
   ]
 }
