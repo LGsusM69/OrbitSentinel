@@ -1,4 +1,18 @@
 {
-  "main": [1, 0],
-  "scientist": [1,2,0]
+  "main": [{"Login":  1}, {"Exit": 0}],
+  "scientist": [
+    {"Track objects in space":  1},
+    {"Assess orbit status":  2},
+    {"Back": 0}
+  ],
+  "track-space": [
+    {"Rocket body": 1},
+    {"Debris": 2},
+    {"Payload": 3},
+    {"Unknown": 4},
+    {"Back": 0}
+  ],
+  "assess": [
+    {}
+  ]
 }

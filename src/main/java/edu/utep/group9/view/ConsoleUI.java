@@ -1,5 +1,8 @@
 package edu.utep.group9.view;
 
+import edu.utep.group9.controllers.ScientistController;
+import edu.utep.group9.controllers.UIController;
+
 import java.util.*;
 
 
@@ -7,6 +10,7 @@ import java.util.*;
  * Uses the default System input and output.
  * then it delegates actions to the controller.*/
 public class ConsoleUI {
+    UIController uiControl;
 
     private Scanner sc;
     private boolean running;
@@ -19,10 +23,12 @@ public class ConsoleUI {
     /**All possible menu options are saved here.*/
     private HashMap<String, List<Integer>> options;
     
-    public ConsoleUI() {
+    public ConsoleUI(UIController uiControl) {
+        this.uiControl = uiControl;
         options = new HashMap<>();
         options.put("main", new ArrayList<>(Arrays.asList(1, 0)));
         options.put("scientist", new ArrayList<>(Arrays.asList(1, 2, 0)));
+        options.put("track-space", new ArrayList<>(Arrays.asList(1, 2, 3, 4, 0)));
         running = false;
         sc = new Scanner(System.in);
     }
@@ -35,8 +41,11 @@ public class ConsoleUI {
         mainMenu();
         while(running) {
             input = getInput();
-            processInput(input);
+            uiControl.handleInput(state, input);
         }
+    }
+    public void stop() {
+        running = false;
     }
 
     /*The following methods display the
@@ -55,11 +64,20 @@ public class ConsoleUI {
                 "2) Assess Orbit Status\n\t" +
                 "0) Back");
     }
+    public void trackSpaceMenu() {
+        state = "track-space";
+        System.out.println("Object type:\n\t" +
+                "1) Rocket body\n\t" +
+                "2) Debris\n\t" +
+                "3) Payload\n\t" +
+                "4) Unknown\n\t" +
+                "0) Back");
+    }
 
     /*Prompts user for input and validates it
     before proceding.
      */
-    public int getInput() {
+    private int getInput() {
         int input = -1;
 
         while(!options.get(state).contains(input)) {
@@ -72,26 +90,10 @@ public class ConsoleUI {
             System.out.println("Invalid input.");
             switch(state) {
                 case "main": mainMenu(); break;
+                case "scientist": scientistMenu(); break;
+                case "track-space": trackSpaceMenu(); break;
             }
         }
         return input;
-    }
-
-    /*decides the next action based on state and input*/
-    public void processInput(int input) {
-        switch(state + input) {
-            case "main1":
-                System.out.println("authenticating user[scientist]...");
-                //authenticate user
-                System.out.println("Logged in as scientist");
-                scientistMenu();
-                break;
-            case "main0":
-                System.out.println("Exiting...");
-
-                running = false;
-            case "scientist1":
-                break;
-        }
     }
 }
