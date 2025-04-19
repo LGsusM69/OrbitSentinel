@@ -1,20 +1,23 @@
 {
-  "main": [{"Login":  1}, {"Exit": 0}],
+  "main": [
+    { "label": "Login", "value": 1 },
+    { "label": "Exit", "value": 0 }
+  ],
   "scientist": [
-    {"Track objects in space":  1},
-    {"Assess orbit status":  2},
-    {"Back": 0}
+    { "label": "Track objects in space", "value": 1 },
+    { "label": "Assess orbit status", "value": 2 },
+    { "label": "Back", "value": 0 }
   ],
   "track-space": [
-    {"Rocket body": 1},
-    {"Debris": 2},
-    {"Payload": 3},
-    {"Unknown": 4},
-    {"Back": 0}
+    { "label": "Rocket body", "value": 1 },
+    { "label": "Debris", "value": 2 },
+    { "label": "Payload", "value": 3 },
+    { "label": "Unknown", "value": 4 },
+    { "label": "Back", "value": 0 }
   ],
   "assess-orbit": [
-    {"Track objects in LEO": 1},
-    {"Asses if debris is still in orbit": 2},
-    {"Back": 0}
+    { "label": "Track objects in LEO", "value": 1 },
+    { "label": "Assess if debris is still in orbit", "value": 2 },
+    { "label": "Back", "value": 0 }
   ]
 }

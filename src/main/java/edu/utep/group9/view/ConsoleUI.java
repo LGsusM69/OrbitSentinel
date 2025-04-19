@@ -1,7 +1,7 @@
 package edu.utep.group9.view;
 
-import edu.utep.group9.controllers.ScientistController;
 import edu.utep.group9.controllers.UIController;
+import edu.utep.group9.models.Menu;
 
 import java.util.*;
 
@@ -21,14 +21,11 @@ public class ConsoleUI {
     private String state;
 
     /**All possible menu options are saved here.*/
-    private HashMap<String, List<Integer>> options;
-    
+    private HashMap<String, List<Menu>> menu;
+
+
     public ConsoleUI(UIController uiControl) {
         this.uiControl = uiControl;
-        options = new HashMap<>();
-        options.put("main", new ArrayList<>(Arrays.asList(1, 0)));
-        options.put("scientist", new ArrayList<>(Arrays.asList(1, 2, 0)));
-        options.put("track-space", new ArrayList<>(Arrays.asList(1, 2, 3, 4, 0)));
         running = false;
         sc = new Scanner(System.in);
     }
@@ -41,37 +38,11 @@ public class ConsoleUI {
         mainMenu();
         while(running) {
             input = getInput();
-            uiControl.handleInput(state, input);
+            if(isValidInput(input)) uiControl.handleInput(state, input);
         }
     }
     public void stop() {
         running = false;
-    }
-
-    /*The following methods display the
-    appropriate menu options in the console
-     */
-    public void mainMenu() {
-        state = "main";
-        System.out.println("Main menu:\n\t" +
-                "1) Login\n\t" +
-                "0) Exit");
-    }
-    public void scientistMenu() {
-        state = "scientist";
-        System.out.println("username [type]\n Select an option:\n\t" +
-                "1) Track objects in space\n\t" +
-                "2) Assess Orbit Status\n\t" +
-                "0) Back");
-    }
-    public void trackSpaceMenu() {
-        state = "track-space";
-        System.out.println("Object type:\n\t" +
-                "1) Rocket body\n\t" +
-                "2) Debris\n\t" +
-                "3) Payload\n\t" +
-                "4) Unknown\n\t" +
-                "0) Back");
     }
 
     /*Prompts user for input and validates it
@@ -79,21 +50,63 @@ public class ConsoleUI {
      */
     private int getInput() {
         int input = -1;
-
-        while(!options.get(state).contains(input)) {
-            try {
-                input = sc.nextInt();
-            } catch (InputMismatchException e) {
-                sc.nextLine();
-            }
-            if(options.get(state).contains(input)) break;
-            System.out.println("Invalid input.");
-            switch(state) {
-                case "main": mainMenu(); break;
-                case "scientist": scientistMenu(); break;
-                case "track-space": trackSpaceMenu(); break;
-            }
+        try {
+            input = sc.nextInt();
+        } catch (InputMismatchException e) {
+            sc.nextLine();
         }
         return input;
+    }
+
+    private boolean isValidInput(int input) {
+        List<Menu> options = menu.get(state);
+        for (Menu option : options) {
+            if (option.getValue() == input) {
+                return true;
+            }
+        }
+        System.out.println("Invalid input.");
+        switch(state) {
+            case "main": mainMenu(); break;
+            case "scientist": scientistMenu(); break;
+            case "track-space": trackSpaceMenu(); break;
+        }
+        return false;
+    }
+    public void setMenu(HashMap<String, List<Menu>> menu) {
+        this.menu = menu;
+    }
+
+    /*The following methods display the
+    appropriate menu options in the console
+     */
+    public void mainMenu() {
+        state = "main";
+        System.out.println("Main menu:");
+        for (Menu option : menu.get("main")) {
+            System.out.println("\t" + option.getValue() + ") " + option.getLabel());
+        }
+    }
+    public void scientistMenu() {
+        state = "scientist";
+        System.out.println("username [type]\n Select an option:");
+        for (Menu option : menu.get("scientist")) {
+            System.out.println("\t" + option.getValue() + ") " + option.getLabel());
+        }
+
+    }
+    public void trackSpaceMenu() {
+        state = "track-space";
+        System.out.println("Object type:");
+        for (Menu option : menu.get("track-space")) {
+            System.out.println("\t" + option.getValue() + ") " + option.getLabel());
+        }
+    }
+    public void assessOrbitMenu() {
+        state = "assess-orbit";
+        System.out.println("username [type]\n Select an option:");
+        for (Menu option : menu.get("assess-orbit")) {
+            System.out.println("\t" + option.getValue() + ") " + option.getLabel());
+        }
     }
 }
