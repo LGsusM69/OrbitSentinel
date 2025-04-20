@@ -11,6 +11,7 @@ public class User {
         POLICYMAKER,
         ADMINISTRATOR
     }
+    public User() {}
 
     public User(String username, String password, Role role) {
         this.username = username;
