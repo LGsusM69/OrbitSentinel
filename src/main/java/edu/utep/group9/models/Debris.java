@@ -1,4 +1,4 @@
 package edu.utep.group9.models;
 
-public class Debris {
+public class Debris extends SpaceObject {
 }
