@@ -1,9 +1,11 @@
 package edu.utep.group9.controllers;
 
+import edu.utep.group9.models.SpaceObject;
 import edu.utep.group9.util.MenuOptionsLoader;
 import edu.utep.group9.view.ConsoleUI;
 
 import java.io.Console;
+import java.util.List;
 
 public class UIController {
 
@@ -40,19 +42,25 @@ public class UIController {
             case "scientist3":
                 break;
             case "track-space1":
-                scientist.track("rocket", "all");
+                /*If the user selects this option, the system shall
+                    provide a list of all Rocket Body with the following
+                    information:
+                    1. Record ID, Satellite Name, Country, Orbit Type, Launch
+                    Year, Launch Site, Longitude, Avg. Longitude, Geohash,
+                    and Days Old.*/
+                ui.printData(scientist.track("ROCKET BODY", "ALL"));
                 ui.trackSpaceMenu();
                 break;
             case "track-space2":
-                scientist.track("debris", "all");
+                ui.printData(scientist.track("DEBRIS", "ALL"));
                 ui.trackSpaceMenu();
                 break;
             case "track-space3":
-                scientist.track("payload", "all");
+                ui.printData(scientist.track("PAYLOAD", "ALL"));
                 ui.trackSpaceMenu();
                 break;
             case "track-space4":
-                scientist.track("unknown", "all");
+                ui.printData(scientist.track("UNKNOWN", "ALL"));
                 ui.trackSpaceMenu();
                 break;
             case "track-space0":

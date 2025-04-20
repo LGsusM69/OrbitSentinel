@@ -2,6 +2,10 @@ package edu.utep.group9.models;
 
 import java.sql.Timestamp;
 
+/*This abstract class models all space objects in the data.
+ *This is a fluent interface. All the setter methods return
+ * the instance of a subtype.
+ */
 public abstract class SpaceObject {
     private String recordId;
     private String noradCatID;
@@ -134,6 +138,102 @@ public abstract class SpaceObject {
         return this;
     }
     
+    public String getRecordId() {
+        return recordId;
+    }
     
+    public String getNoradCatID() {
+        return noradCatID;
+    }
+    
+    public String getSatelliteName() {
+        return satelliteName;
+    }
+    
+    public String getCountry() {
+        return country;
+    }
+    
+    public String getAproximateOrbitType() {
+        return aproximateOrbitType;
+    }
+    
+    public String getObjectType() {
+        return objectType;
+    }
+    
+    public int getLaunchYear() {
+        return launchYear;
+    }
+    
+    public String getLaunchSite() {
+        return launchSite;
+    }
+    
+    public double getLongitude() {
+        return longitude;
+    }
+    
+    public double getAvgLongitude() {
+        return avgLongitude;
+    }
+    
+    public String getGeoHash() {
+        return geoHash;
+    }
+    
+    public String getHrrCategory() {
+        return hrrCategory;
+    }
+    
+    public boolean isNominated() {
+        return isNominated;
+    }
+    
+    public Timestamp getNominatedAt() {
+        return nominatedAt;
+    }
+    
+    public Boolean getHasDosier() {
+        return hasDosier;
+    }
+    
+    public Timestamp getLastUpdatedAt() {
+        return lastUpdatedAt;
+    }
+    
+    public String getJustification() {
+        return justification;
+    }
+    
+    public String getFocusedAnalysis() {
+        return focusedAnalysis;
+    }
+    
+    public int getDaysOld() {
+        return daysOld;
+    }
+    
+    public long getConjunctionCount() {
+        return conjunctionCount;
+    }
+    
+    public boolean isUnkObject() {
+        return isUnkObject;
+    }
+    
+    @Override
+    public String toString() {
+        return recordId + ", " +
+                satelliteName + ", " +
+                country + ", " +
+                aproximateOrbitType + ", " +
+                launchYear + ", " +
+                launchSite + ", " +
+                String.format("%.5f", longitude) + ", " +
+                String.format("%.5f", avgLongitude) + ", " +
+                geoHash + ", " +
+                daysOld;
+    }
     
 }

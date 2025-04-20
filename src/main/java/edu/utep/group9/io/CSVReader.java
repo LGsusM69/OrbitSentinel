@@ -10,37 +10,35 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
+/**This class parses csv files, creates a list of SpaceObjeecs
+ * and returns the list.
+ */
 public class CSVReader {
     
     
-    /* karl create objects like this:
-    SpaceObject object = new DebrisBuilder()
-    .recordID(1234)
-    .noradCatID(bla bla)
-    .satelliteName("bla bla bla")
-    .....
-
-     */
     private File file;
     private Reader reader;
+    private List<SpaceObject> data;
+    private Iterable<CSVRecord> records;
 
-    public CSVReader() {
-        try {
-            file = new File("data/rso_metrics.csv");
-            this.reader = new FileReader(file);
-        } catch (NullPointerException e) {
-            e.printStackTrace();
-        }
-        catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+    /* The constructor may throw an exception.
+    To be handled by the client class.
+     */
+    public CSVReader() throws NullPointerException, FileNotFoundException {
+        
+        file = new File("data/rso_metrics.csv");
+        this.reader = new FileReader(file);
     }
-    public List<SpaceObject> buildData() throws IOException{
-        List<SpaceObject> data = new ArrayList<>();
+    /*This method parses the csv file and builds the data list.
+    IOException may be thrown if the data file is in "UTF-8 with BOM"
+     */
+    public void buildData() throws IOException {
+        data = new ArrayList<>();
         Iterable<CSVRecord> records = CSVFormat.DEFAULT
                 .withFirstRecordAsHeader()
                 .withTrim()
                 .parse(reader);
+        this.records = records;
         for(CSVRecord record : records) {
             SpaceObject object = SpaceObjectFactory.getSpaceObject(record.get("object_type"));
             object.recordId(record.get("record_id"))
@@ -67,6 +65,8 @@ public class CSVReader {
                     .isUnkObject(Boolean.getBoolean(record.get("is_unk_object")));
             data.add(object);
         }
-        return data;
+    }
+    public List<SpaceObject> getObjects() {
+        return new ArrayList<>(this.data);
     }
 }

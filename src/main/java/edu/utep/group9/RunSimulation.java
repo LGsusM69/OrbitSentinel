@@ -6,16 +6,20 @@ import edu.utep.group9.io.CSVReader;
 import edu.utep.group9.util.MenuOptionsLoader;
 import edu.utep.group9.view.ConsoleUI;
 
+import java.io.FileNotFoundException;
 import java.util.Map;
 
 public class RunSimulation {
     public static void main(String[] args) {
 
-        //System.out.println("Initializing...");
-        CSVReader reader = new CSVReader();
+        System.out.println("Loading data...");
+        CSVReader reader = null;
+        try {
+            reader = new CSVReader();
+        } catch (FileNotFoundException e) {
+            //throw new RuntimeException(e);
+        }
         try{reader.buildData();} catch(Exception e) {e.printStackTrace();}
-
-        //ScientistController scientistController = new ScientistController();
-        //UIController uiControl = new UIController(scientistController);
+        UIController uiControl = new UIController(new ScientistController(reader));
     }
 }

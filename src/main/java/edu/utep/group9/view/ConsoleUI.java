@@ -73,6 +73,9 @@ public class ConsoleUI {
         }
         return false;
     }
+    public void printData(String data) {
+        System.out.println(data);
+    }
     public void setMenu(HashMap<String, List<Menu>> menu) {
         this.menu = menu;
     }

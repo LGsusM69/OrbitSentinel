@@ -1,5 +1,8 @@
 package edu.utep.group9.models;
 
+/**This class builds a subtype of SpaceObject.
+ *
+ */
 public class SpaceObjectFactory {
     
     public static SpaceObject getSpaceObject(String objectType) {
