@@ -36,10 +36,11 @@ public class ScientistController {
         System.out.println("tracking: " + objectType + " " + orbit);
         return toString(objects);
     }
-    public List<SpaceObject> filterObjects(List<SpaceObject> objects, String objectType, String orbit) {
+    private List<SpaceObject> filterObjects(List<SpaceObject> objects, String objectType, String orbit) {
         objects.removeIf(object ->
-                (!objectType.equals("ALL") && !object.getObjectType().equalsIgnoreCase(objectType)) ||
-                        (!orbit.equals("ALL") && !object.getAproximateOrbitType().equalsIgnoreCase(orbit))
+            (orbit.equals("LEO") && !object.getAproximateOrbitType().equals("LEO"))
+            ||(orbit.equals("INORBIT") && object.getAproximateOrbitType().equals(("")))
+            ||(!objectType.equals("ALL") && !object.getObjectType().equalsIgnoreCase(objectType))
         );
         return objects;
     }
@@ -56,5 +57,7 @@ public class ScientistController {
     
     public void assessDebre() {
         System.out.println("assessing if debre is on orbit...");
+        String objects = track("ALL", "INORBIT");
+        System.out.println(objects);
     }
 }

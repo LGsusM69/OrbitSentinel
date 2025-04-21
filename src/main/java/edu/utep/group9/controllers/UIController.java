@@ -39,15 +39,10 @@ public class UIController {
             case "scientist2":
                 ui.assessOrbitMenu();
                 break;
-            case "scientist3":
+            case "scientist0":
+                ui.mainMenu();
                 break;
             case "track-space1":
-                /*If the user selects this option, the system shall
-                    provide a list of all Rocket Body with the following
-                    information:
-                    1. Record ID, Satellite Name, Country, Orbit Type, Launch
-                    Year, Launch Site, Longitude, Avg. Longitude, Geohash,
-                    and Days Old.*/
                 ui.printData(scientist.track("ROCKET BODY", "ALL"));
                 ui.trackSpaceMenu();
                 break;
@@ -67,7 +62,7 @@ public class UIController {
                 ui.scientistMenu();
                 break;
             case "assess-orbit1":
-                scientist.track("all", "leo");
+                ui.printData(scientist.track("ALL", "LEO"));
                 ui.assessOrbitMenu();
                 break;
             case "assess-orbit2":
