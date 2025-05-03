@@ -3,6 +3,8 @@ package edu.utep.group9;
 import edu.utep.group9.controllers.ScientistController;
 import edu.utep.group9.controllers.UIController;
 import edu.utep.group9.io.CSVReader;
+import edu.utep.group9.io.CSVWriter;
+import edu.utep.group9.models.SpaceObject;
 import edu.utep.group9.util.MenuOptionsLoader;
 import edu.utep.group9.view.ConsoleUI;
 
@@ -19,7 +21,10 @@ public class RunSimulation {
         } catch (FileNotFoundException e) {
             //throw new RuntimeException(e);
         }
-        try{reader.buildData();} catch(Exception e) {e.printStackTrace();}
+        try{
+            reader.buildData();
+            CSVWriter.writeCSVFile(reader.getObjects(),"data/calamardo.csv");
+        } catch(Exception e) {e.printStackTrace();}
         UIController uiControl = new UIController(new ScientistController(reader));
     }
 }

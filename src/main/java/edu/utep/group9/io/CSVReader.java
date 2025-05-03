@@ -8,7 +8,9 @@ import org.apache.commons.csv.CSVRecord;
 import java.io.*;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**This class parses csv files, creates a list of SpaceObjeecs
  * and returns the list.
@@ -18,7 +20,7 @@ public class CSVReader {
     
     private File file;
     private Reader reader;
-    private List<SpaceObject> data;
+    private Set<SpaceObject> data;
     private Iterable<CSVRecord> records;
 
     /* The constructor may throw an exception.
@@ -33,7 +35,7 @@ public class CSVReader {
     IOException may be thrown if the data file is in "UTF-8 with BOM"
      */
     public void buildData() throws IOException {
-        data = new ArrayList<>();
+        data = new HashSet<>();
         Iterable<CSVRecord> records = CSVFormat.DEFAULT
                 .withFirstRecordAsHeader()
                 .withTrim()
@@ -66,7 +68,7 @@ public class CSVReader {
             data.add(object);
         }
     }
-    public List<SpaceObject> getObjects() {
-        return new ArrayList<>(this.data);
+    public HashSet<SpaceObject> getObjects() {
+        return new HashSet<>(this.data);
     }
 }

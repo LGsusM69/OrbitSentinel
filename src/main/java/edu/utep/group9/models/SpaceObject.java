@@ -15,7 +15,7 @@ public abstract class SpaceObject {
     private String objectType;
     private int launchYear;
     private String launchSite;
-    private double longitude;
+    private Double longitude;
     private double avgLongitude;
     private String geoHash;
     private String hrrCategory;
@@ -28,6 +28,8 @@ public abstract class SpaceObject {
     private int daysOld;
     private long conjunctionCount;
     private boolean isUnkObject;
+    private boolean stillInOrbit;
+    private String riskLevel;
 
     public SpaceObject() {
 
@@ -137,6 +139,14 @@ public abstract class SpaceObject {
         this.isUnkObject = isUnkObject;
         return this;
     }
+    public SpaceObject isStillInOrbit(boolean stillInOrbit) {
+        this.stillInOrbit = stillInOrbit;
+        return this;
+    }
+    public SpaceObject riskLevel(String riskLevel) {
+        this.riskLevel = riskLevel;
+        return this;
+    }
     
     public String getRecordId() {
         return recordId;
@@ -170,7 +180,7 @@ public abstract class SpaceObject {
         return launchSite;
     }
     
-    public double getLongitude() {
+    public Double getLongitude() {
         return longitude;
     }
     
@@ -220,6 +230,12 @@ public abstract class SpaceObject {
     
     public boolean isUnkObject() {
         return isUnkObject;
+    }
+    public boolean isStillInOrbit() {
+        return stillInOrbit;
+    }
+    public String getRiskLevel() {
+        return riskLevel;
     }
     
     @Override

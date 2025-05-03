@@ -4,6 +4,8 @@ public class User {
     private String username;
     private String password; // In a real system, use hashed passwords
     private Role role;
+    private String name;
+    private String lastName;
 
     public enum Role {
         SCIENTIST,
@@ -31,6 +33,9 @@ public class User {
     public Role getRole() {
         return role;
     }
+    
+    public String getName() {return name;}
+    public String getLastName() {return lastName;}
 
     // Setters
     public void setUsername(String username) {
