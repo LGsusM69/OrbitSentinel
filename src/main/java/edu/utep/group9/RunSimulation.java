@@ -9,6 +9,7 @@ import edu.utep.group9.util.MenuOptionsLoader;
 import edu.utep.group9.view.ConsoleUI;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Map;
 
 public class RunSimulation {
@@ -18,12 +19,16 @@ public class RunSimulation {
         CSVReader reader = null;
         try {
             reader = new CSVReader();
+            reader.buildData();
         } catch (FileNotFoundException e) {
             //throw new RuntimeException(e);
+        } catch (IOException e) {
+            System.out.println("Warning: data couldnt be loaded automatically.\n" +
+                    "Check input files.");
+            e.printStackTrace();
         }
         try{
-            reader.buildData();
-            CSVWriter.writeCSVFile(reader.getObjects(),"data/calamardo.csv");
+            //CSVWriter.writeCSVFile(reader.getObjects(),"data/calamardo.csv");
         } catch(Exception e) {e.printStackTrace();}
         UIController uiControl = new UIController(new ScientistController(reader));
     }

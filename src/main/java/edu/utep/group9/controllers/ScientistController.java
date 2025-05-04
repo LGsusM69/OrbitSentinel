@@ -1,12 +1,14 @@
 package edu.utep.group9.controllers;
 
 import edu.utep.group9.io.CSVReader;
+import edu.utep.group9.io.CSVWriter;
 import edu.utep.group9.io.Logger;
 import edu.utep.group9.io.TXTReportWriter;
 import edu.utep.group9.models.SpaceObject;
 import edu.utep.group9.models.User;
 import org.apache.commons.csv.CSVRecord;
 
+import java.io.IOException;
 import java.util.*;
 
 public class ScientistController {
@@ -28,24 +30,42 @@ public class ScientistController {
         ));
     }
     public ScientistController(CSVReader reader) {
+        System.out.println("");
         this.reader = reader;
     }
 
     public String track(String objectType, String orbit) {
         HashSet<SpaceObject> objects = reader.getObjects();
+        if(objects == null) {
+            try {
+                System.out.println("Loading data...");
+                reader.buildData();
+                objects = reader.getObjects();
+            } catch(IOException e) {
+                System.out.println(
+                    "Error: data couldnt be loaded. Aborting operation\n" + e.toString());
+            }
+        }
         filterObjects(objects, objectType, orbit);
         System.out.println("tracking: " + objectType + " " + orbit);
         Logger.update(new User(), "track");
         return toString(objects);
     }
     private HashSet<SpaceObject> filterObjects(HashSet<SpaceObject> objects, String objectType, String orbit) {
-        objects.removeIf(object ->
-            (orbit.equals("LEO") && !object.getAproximateOrbitType().equals("LEO"))
-            ||(orbit.equals("INORBIT") && (object.getAproximateOrbitType().equals("")
-                                            || object.getAproximateOrbitType().equals("Unknown Orbit Category")))
-            ||(!objectType.equals("ALL") && !object.getObjectType().equalsIgnoreCase(objectType))
-        );
-        return objects;
+        HashSet<SpaceObject> filteredOut = new HashSet<>();
+        objects.forEach((object) -> {
+            if((orbit.equals("LEO") && !object.getAproximateOrbitType().equals("LEO"))
+                    ||(orbit.equals("INORBIT") && (object.getAproximateOrbitType().equals("")
+                    || object.getAproximateOrbitType().equals("Unknown Orbit Category")))
+                    ||(!objectType.equals("ALL") && !object.getObjectType().equalsIgnoreCase(objectType))) {
+                filteredOut.add(object);
+
+            }
+        });
+        filteredOut.forEach(objects::remove);
+        objects.removeAll(filteredOut);
+
+        return filteredOut;
     }
     
     private String toString(Set<SpaceObject> objects) {
@@ -60,7 +80,18 @@ public class ScientistController {
     
     public void assessDebre() {
         HashSet<SpaceObject> objects = reader.getObjects();
-        filterObjects(objects, "DEBRIS", "INORBIT");
+        if(objects == null) {
+            try {
+                System.out.println("Loading data...");
+                reader.buildData();
+                objects = reader.getObjects();
+            } catch(IOException e) {
+                System.out.println(
+                        "Error: data couldnt be loaded. Aborting operation\n" + e.toString());
+            }
+        }
+        Set<SpaceObject> satellites = filterObjects(objects, "DEBRIS", "INORBIT");
+
         HashSet <SpaceObject> notInOrbit = new HashSet<>();
         for(SpaceObject object : objects) {
             if(object.getLongitude() < -180.0
@@ -82,6 +113,7 @@ public class ScientistController {
             }
         }
         for(SpaceObject object : notInOrbit) objects.remove(object);
+        CSVWriter.writeCSVFile(objects, "data/data-out.csv");
         TXTReportWriter.writeReport(objects, notInOrbit, "data/orbit-statuss-report.txt");
         Logger.update(new User(), "track");
     }
