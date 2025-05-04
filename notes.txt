@@ -1,0 +1,11 @@
+*work on logger
+
+*handle caught exceptions inscientist controller
+
+* javadoc comments
+
+* generate java doc
+
+* update class diagram
+
+* update use case diagram

@@ -251,5 +251,8 @@ public abstract class SpaceObject {
                 geoHash + ", " +
                 daysOld;
     }
+    public String toStringWithOrbitAssessment() {
+        return toString() + ", " + Boolean.toString(stillInOrbit) + ", " + riskLevel;
+    }
     
 }
