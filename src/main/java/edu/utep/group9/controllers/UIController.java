@@ -10,6 +10,7 @@ public class UIController {
     ScientistController scientist;
     AdminController admin;
     ConsoleUI ui;
+    String data;
 
     public UIController(ScientistController scientist) {
         this.scientist = scientist;
@@ -87,16 +88,26 @@ public class UIController {
             case "admin1":
                 ui.createMenu();
                 break;
-            case "admin2":
-                //manage user
-                break;
+            case "admin2": {
+                String username = ui.manage();
+                String user = AdminController.validateUsername(username);
+                if(!user.equals("")) {
+                    data = user;
+                    ui.update(user);
+                    break;
+                } else {
+                    ui.printData("User not found");
+                    ui.adminMenu();
+                    break;
+                }
+            }
             case "admin3":
                 //delete user
                 break;
             case "admin0":
                 ui.mainMenu();
                 break;
-            case "create1", "create2", "create3", "create4":
+            case "create1", "create2", "create3", "create4": {
                 String username = ui.promptUser("Create new username:");
                 String password = ui.promptUser("Create new password:");
                 User user = AdminController.createUser(username, password, input);
@@ -105,7 +116,29 @@ public class UIController {
                 else System.out.println("Failed to create new user");
                 ui.adminMenu();
                 break;
-            
+            }
+            case "update1", "update2": {
+                String field = "";
+                switch (input) {
+                    case 1: field = "username"; break;
+                    case 2: field = "password"; break;
+                }
+                String value = ui.promptUser("Enter new " + field + " for [" + data.substring(0, data.indexOf(",")) + "] :");
+                String statuss = AdminController.update(data, field, value);
+                ui.printData(statuss);
+                ui.adminMenu();
+                break;
+            }
+            case "update3":
+                ui.typeMenu(data);
+                break;
+            case "type1", "type2", "type3": {
+                System.out.println("roastbeef: " + data);
+                String statuss = AdminController.updateType(data, input);
+                ui.printData(statuss);
+                ui.adminMenu();
+                break;
+            }
         }
     }
 }

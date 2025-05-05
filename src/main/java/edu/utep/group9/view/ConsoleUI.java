@@ -11,6 +11,7 @@ import java.util.*;
  * then it delegates actions to the controller.*/
 public class ConsoleUI {
     UIController uiControl;
+    String data;
 
     private Scanner sc;
     private boolean running;
@@ -78,6 +79,7 @@ public class ConsoleUI {
             case "track-space": trackSpaceMenu(); break;
             case "assess-orbit": assessOrbitMenu(); break;
             case "admin": adminMenu(); break;
+            case "update": update(data); break;
         }
         return false;
     }
@@ -138,6 +140,28 @@ public class ConsoleUI {
         state = "create";
         System.out.println("Choose the type of user to create: ");
         for (Menu option : menu.get("create")) {
+            System.out.println("\t" + option.getValue() + ") " + option.getLabel());
+        }
+    }
+    public String manage() {
+        System.out.println("User Management.\n");
+        return promptUser("Enter a username: ");
+    }
+    public void update(String user) {
+        state = "update";
+        data = user;
+        String[] data = user.split(",");
+        System.out.println("Modifying user: " + data[0] + "\n" +
+                "type: " + data[2]);
+        for (Menu option : menu.get("update")) {
+            System.out.println("\t" + option.getValue() + ") " + option.getLabel());
+        }
+    }
+    public void typeMenu(String data) {
+        state = "type";
+        data = data;
+        System.out.println("Select new type for [" + data.substring(0, data.indexOf(",")) + "]:");
+        for (Menu option : menu.get("type")) {
             System.out.println("\t" + option.getValue() + ") " + option.getLabel());
         }
     }

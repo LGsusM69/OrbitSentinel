@@ -50,6 +50,8 @@ public abstract class User {
         this.type = type;
     }
 
-
+    public String toString() {
+        return username + "," + password + "," + type.toString();
+    }
 }
 

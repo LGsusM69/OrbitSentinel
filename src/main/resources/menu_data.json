@@ -38,5 +38,17 @@
     {"label": "Policymaker", "value": 3},
     {"label": "Administrator", "value": 4},
     {"label": "Cancel", "value": 0}
+  ],
+  "update": [
+    {"label": "Change username", "value": 1},
+    {"label": "Change password", "value": 2},
+    {"label": "Change type", "value": 3}
+  ],
+  "type": [
+    {"label": "Scientist", "value": 1},
+    {"label": "Space Agency Representative", "value": 2},
+    {"label": "Policymaker", "value": 3},
+    {"label": "Administrator", "value": 4},
+    {"label": "Cancel", "value": 0}
   ]
 }
