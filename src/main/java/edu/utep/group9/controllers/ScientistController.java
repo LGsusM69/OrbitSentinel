@@ -5,7 +5,7 @@ import edu.utep.group9.io.CSVWriter;
 import edu.utep.group9.io.Logger;
 import edu.utep.group9.io.TXTReportWriter;
 import edu.utep.group9.models.spaceObject.SpaceObject;
-import edu.utep.group9.models.User;
+import edu.utep.group9.models.user.User;
 
 import java.io.IOException;
 import java.util.*;
@@ -49,7 +49,7 @@ public class ScientistController {
         }
         filterObjects(objects, objectType, orbit);  //remove objects not in LEO or not specified object type.
         // System.out.println("tracking: " + objectType + " " + orbit); move to UI controller
-        Logger.update(new User(), "track");     // update log file
+        //Logger.update(new User(), "track");     // update log file
         return toString(objects);
     }
     
@@ -94,7 +94,7 @@ public class ScientistController {
     /**builds a set of SpaceObject matching the specified criteria.
      * creates or updates a txt and a csv file.
      */
-    public void assessDebre() {
+    public boolean assessDebre() {
         HashSet<SpaceObject> objects = reader.getObjects();
         if(objects == null) {                                   //null check block
             try {
@@ -133,6 +133,8 @@ public class ScientistController {
         for(SpaceObject object : notInOrbit) objects.add(object); // adding back objects removed for operation
         for(SpaceObject object : satellites) objects.add(object); //adding back satellites
         CSVWriter.writeCSVFile(objects, "data/data-out.csv");       //generate new csv data
-        Logger.update(new User(), "track");                     //update log
+        //Logger.update(new User(), "track");
+        //update log
+        return true;
     }
 }

@@ -1,6 +1,6 @@
-package edu.utep.group9.models;
+package edu.utep.group9.models.user;
 
-public class User {
+public abstract class User {
     private String username;
     private String password; // In a real system, use hashed passwords
     private Role role;

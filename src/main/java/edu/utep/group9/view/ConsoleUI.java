@@ -57,6 +57,10 @@ public class ConsoleUI {
         }
         return input;
     }
+    public String promptUser(String prompt) {
+        System.out.println(prompt);
+        return sc.nextLine();
+    }
 
     private boolean isValidInput(int input) {
         List<Menu> options = menu.get(state);
@@ -126,6 +130,13 @@ public class ConsoleUI {
         state = "admin";
         System.out.println("username [type]\n Select an option:");
         for (Menu option : menu.get("admin")) {
+            System.out.println("\t" + option.getValue() + ") " + option.getLabel());
+        }
+    }
+    public void createMenu() {
+        state = "create";
+        System.out.println("Choose the type of user to create: ");
+        for (Menu option : menu.get("create")) {
             System.out.println("\t" + option.getValue() + ") " + option.getLabel());
         }
     }

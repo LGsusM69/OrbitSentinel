@@ -76,14 +76,15 @@ public class UIController {
                 ui.assessOrbitMenu();
                 break;
             case "assess-orbit2":
-                scientist.assessDebre();
+                if(scientist.assessDebre())
+                    ui.printData("Data updated, report file created");
                 ui.assessOrbitMenu();
                 break;
             case "assess-orbit0":
                 ui.scientistMenu();
                 break;
             case "admin1":
-                //create user logic
+                ui.createMenu();
                 break;
             case "admin2":
                 //manage user
@@ -94,6 +95,12 @@ public class UIController {
             case "admin0":
                 ui.mainMenu();
                 break;
+            case "create1", "create2", "create3", "create4":
+                String username = ui.promptUser("Create new username:");
+                String password = ui.promptUser("Create new password:");
+                admin.createUser(username, password, input);
+                break;
+            
         }
     }
 }

@@ -13,12 +13,7 @@
     { "label": "Assess orbit status", "value": 2 },
     { "label": "Back", "value": 0 }
   ],
-  "admin": [
-    {"label": "Create user", "value": 1},
-    {"label": "Manage user", "value": 2},
-    {"label": "Delete user", "value": 3},
-    {"label": "Back", "value": 0}
-  ],
+
   "track-space": [
     { "label": "Rocket body", "value": 1 },
     { "label": "Debris", "value": 2 },
@@ -30,5 +25,18 @@
     { "label": "Track objects in LEO", "value": 1 },
     { "label": "Assess if debris is still in orbit", "value": 2 },
     { "label": "Back", "value": 0 }
+  ],
+  "admin": [
+    {"label": "Create user", "value": 1},
+    {"label": "Manage user", "value": 2},
+    {"label": "Delete user", "value": 3},
+    {"label": "Back", "value": 0}
+  ],
+  "create": [
+    {"label": "Scientist", "value": 1},
+    {"label": "Space Agency Representative", "value": 2},
+    {"label": "Policymaker", "value": 3},
+    {"label": "Administrator", "value": 4},
+    {"label": "Cancel", "value": 0}
   ]
 }

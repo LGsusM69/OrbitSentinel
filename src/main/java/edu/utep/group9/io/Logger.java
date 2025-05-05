@@ -1,6 +1,6 @@
 package edu.utep.group9.io;
 
-import edu.utep.group9.models.User;
+import edu.utep.group9.models.user.User;
 
 import java.sql.Timestamp;
 
