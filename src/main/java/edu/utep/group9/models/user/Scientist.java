@@ -5,4 +5,8 @@ package edu.utep.group9.models.user;
  * the users
  */
 public class Scientist extends User {
+
+    public Scientist(String username, String password, Type type) {
+        super(username, password, type);
+    }
 }

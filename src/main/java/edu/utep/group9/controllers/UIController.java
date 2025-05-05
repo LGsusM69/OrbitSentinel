@@ -1,5 +1,6 @@
 package edu.utep.group9.controllers;
 
+import edu.utep.group9.models.user.User;
 import edu.utep.group9.util.MenuOptionsLoader;
 import edu.utep.group9.view.ConsoleUI;
 
@@ -98,7 +99,11 @@ public class UIController {
             case "create1", "create2", "create3", "create4":
                 String username = ui.promptUser("Create new username:");
                 String password = ui.promptUser("Create new password:");
-                admin.createUser(username, password, input);
+                User user = AdminController.createUser(username, password, input);
+                if(user != null) ui.printData("User added to the system.\n" +
+                        "Username: " + username + " Type: " + user.getType());
+                else System.out.println("Failed to create new user");
+                ui.adminMenu();
                 break;
             
         }

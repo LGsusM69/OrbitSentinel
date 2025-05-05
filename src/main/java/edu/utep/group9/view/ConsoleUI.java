@@ -52,6 +52,7 @@ public class ConsoleUI {
         int input = -1;
         try {
             input = sc.nextInt();
+            if(sc.hasNextLine()) sc.nextLine();
         } catch (InputMismatchException e) {
             sc.nextLine();
         }

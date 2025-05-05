@@ -3,11 +3,11 @@ package edu.utep.group9.models.user;
 public abstract class User {
     private String username;
     private String password; // In a real system, use hashed passwords
-    private Role role;
+    private Type type;
     private String name;
     private String lastName;
 
-    public enum Role {
+    public enum Type {
         SCIENTIST,
         SPACE_AGENCY_REPRESENTATIVE,
         POLICYMAKER,
@@ -15,10 +15,10 @@ public abstract class User {
     }
     public User() {}
 
-    public User(String username, String password, Role role) {
+    public User(String username, String password, Type type) {
         this.username = username;
         this.password = password;
-        this.role = role;
+        this.type = type;
     }
 
     // Getters
@@ -30,8 +30,8 @@ public abstract class User {
         return password;
     }
 
-    public Role getRole() {
-        return role;
+    public Type getType() {
+        return type;
     }
     
     public String getName() {return name;}
@@ -46,8 +46,8 @@ public abstract class User {
         this.password = password;
     }
 
-    public void setRole(Role role) {
-        this.role = role;
+    public void setRole(Type type) {
+        this.type = type;
     }
 
 
