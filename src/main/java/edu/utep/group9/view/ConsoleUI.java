@@ -68,8 +68,11 @@ public class ConsoleUI {
         System.out.println("Invalid input.");
         switch(state) {
             case "main": mainMenu(); break;
+            case "login": loginMenu(); break;
             case "scientist": scientistMenu(); break;
             case "track-space": trackSpaceMenu(); break;
+            case "assess-orbit": assessOrbitMenu(); break;
+            case "admin": adminMenu(); break;
         }
         return false;
     }
@@ -87,6 +90,13 @@ public class ConsoleUI {
         state = "main";
         System.out.println("Main menu:");
         for (Menu option : menu.get("main")) {
+            System.out.println("\t" + option.getValue() + ") " + option.getLabel());
+        }
+    }
+    public void loginMenu() {
+        state = "login";
+        System.out.println("Role:");
+        for (Menu option : menu.get("login")) {
             System.out.println("\t" + option.getValue() + ") " + option.getLabel());
         }
     }
@@ -109,6 +119,13 @@ public class ConsoleUI {
         state = "assess-orbit";
         System.out.println("username [type]\n Select an option:");
         for (Menu option : menu.get("assess-orbit")) {
+            System.out.println("\t" + option.getValue() + ") " + option.getLabel());
+        }
+    }
+    public void adminMenu() {
+        state = "admin";
+        System.out.println("username [type]\n Select an option:");
+        for (Menu option : menu.get("admin")) {
             System.out.println("\t" + option.getValue() + ") " + option.getLabel());
         }
     }

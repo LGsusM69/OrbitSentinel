@@ -4,9 +4,8 @@ import edu.utep.group9.io.CSVReader;
 import edu.utep.group9.io.CSVWriter;
 import edu.utep.group9.io.Logger;
 import edu.utep.group9.io.TXTReportWriter;
-import edu.utep.group9.models.SpaceObject;
+import edu.utep.group9.models.spaceObject.SpaceObject;
 import edu.utep.group9.models.User;
-import org.apache.commons.csv.CSVRecord;
 
 import java.io.IOException;
 import java.util.*;

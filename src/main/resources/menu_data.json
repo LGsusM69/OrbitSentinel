@@ -3,10 +3,21 @@
     { "label": "Login", "value": 1 },
     { "label": "Exit", "value": 0 }
   ],
+  "login": [
+    {"label":  "Scientist", "value": 1},
+    {"label": "Admin", "value": 2},
+    {"label": "Back", "value": 0}
+  ],
   "scientist": [
     { "label": "Track objects in space", "value": 1 },
     { "label": "Assess orbit status", "value": 2 },
     { "label": "Back", "value": 0 }
+  ],
+  "admin": [
+    {"label": "Create user", "value": 1},
+    {"label": "Manage user", "value": 2},
+    {"label": "Delete user", "value": 3},
+    {"label": "Back", "value": 0}
   ],
   "track-space": [
     { "label": "Rocket body", "value": 1 },

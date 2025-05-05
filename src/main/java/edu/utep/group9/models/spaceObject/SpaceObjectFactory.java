@@ -1,4 +1,4 @@
-package edu.utep.group9.models;
+package edu.utep.group9.models.spaceObject;
 
 /**This class builds a subtype of SpaceObject.
  *

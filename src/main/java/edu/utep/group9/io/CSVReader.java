@@ -1,15 +1,13 @@
 package edu.utep.group9.io;
 
-import edu.utep.group9.models.SpaceObject;
-import edu.utep.group9.models.SpaceObjectFactory;
+import edu.utep.group9.models.spaceObject.SpaceObject;
+import edu.utep.group9.models.spaceObject.SpaceObjectFactory;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
 
 import java.io.*;
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 /**This class parses csv files, creates a list of SpaceObjeecs

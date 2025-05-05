@@ -1,16 +1,13 @@
 package edu.utep.group9.controllers;
 
-import edu.utep.group9.models.SpaceObject;
 import edu.utep.group9.util.MenuOptionsLoader;
 import edu.utep.group9.view.ConsoleUI;
-
-import java.io.Console;
-import java.util.List;
 
 public class UIController {
 
     MenuOptionsLoader loader;
     ScientistController scientist;
+    AdminController admin;
     ConsoleUI ui;
 
     public UIController(ScientistController scientist) {
@@ -24,14 +21,27 @@ public class UIController {
     public void handleInput(String state, int input) {
         switch (state + input) {
             case "main1":
-                System.out.println("authenticating user[scientist]...");
                 //authenticate user
-                System.out.println("Logged in as scientist");
-                ui.scientistMenu();
+                ui.loginMenu();
                 break;
             case "main0":
                 System.out.println("Exiting...");
                 ui.stop();
+                break;
+            case "login1":
+                System.out.println("Authenticating user[scientist]...");
+                //authenticate user
+                System.out.println("Logged in as scientist");
+                ui.scientistMenu();
+                break;
+            case "login2":
+                System.out.println("authenticating user[Admin]...");
+                //authenticate user
+                System.out.println("Logged in as admin");
+                ui.adminMenu();
+                break;
+            case "login0":
+                ui.mainMenu();
                 break;
             case "scientist1":
                 ui.trackSpaceMenu();
@@ -71,6 +81,18 @@ public class UIController {
                 break;
             case "assess-orbit0":
                 ui.scientistMenu();
+                break;
+            case "admin1":
+                //create user logic
+                break;
+            case "admin2":
+                //manage user
+                break;
+            case "admin3":
+                //delete user
+                break;
+            case "admin0":
+                ui.mainMenu();
                 break;
         }
     }

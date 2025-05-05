@@ -1,3 +1,5 @@
+*work on uicontroller admin functions
+
 *work on logger
 
 *handle caught exceptions inscientist controller

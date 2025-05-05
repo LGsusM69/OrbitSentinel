@@ -1,4 +1,4 @@
-package edu.utep.group9.models;
+package edu.utep.group9.models.spaceObject;
 
 import java.sql.Timestamp;
 

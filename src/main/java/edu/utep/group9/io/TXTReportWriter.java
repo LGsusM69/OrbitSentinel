@@ -1,6 +1,6 @@
 package edu.utep.group9.io;
 
-import edu.utep.group9.models.SpaceObject;
+import edu.utep.group9.models.spaceObject.SpaceObject;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
