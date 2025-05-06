@@ -79,7 +79,9 @@ public class ConsoleUI {
             case "track-space": trackSpaceMenu(); break;
             case "assess-orbit": assessOrbitMenu(); break;
             case "admin": adminMenu(); break;
+            case "create": createMenu(); break;
             case "update": update(data); break;
+            case "representative": representativeMenu(); break;
         }
         return false;
     }
@@ -102,7 +104,7 @@ public class ConsoleUI {
     }
     public void loginMenu() {
         state = "login";
-        System.out.println("Role:");
+        System.out.println("Login as:");
         for (Menu option : menu.get("login")) {
             System.out.println("\t" + option.getValue() + ") " + option.getLabel());
         }

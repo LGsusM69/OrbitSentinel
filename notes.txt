@@ -1,7 +1,8 @@
 
-*work on logger
+* work on logger
 
-*handle caught exceptions inscientist controller
+* handle exceptions inscientist controller
+* refactor if needed
 
 * javadoc comments
 
@@ -10,3 +11,5 @@
 * update class diagram
 
 * update use case diagram
+
+* write report

@@ -1,5 +1,7 @@
 package edu.utep.group9.controllers;
 
+import edu.utep.group9.io.Logger;
+import edu.utep.group9.io.Logger.Action;
 import edu.utep.group9.models.user.User;
 import edu.utep.group9.util.MenuOptionsLoader;
 import edu.utep.group9.view.ConsoleUI;
@@ -7,16 +9,14 @@ import edu.utep.group9.view.ConsoleUI;
 public class UIController {
     MenuOptionsLoader loader;
     TrackingSystem tracker;
-    AdminController admin;
-    RepController rep;
     ConsoleUI ui;
     String data;
+    Logger logger;
 
     public UIController() {
-        this.admin = new AdminController();
         this.tracker = new TrackingSystem();
-        this.rep = new RepController();
         loader = new MenuOptionsLoader();
+        this.logger = new Logger();
         ui = new ConsoleUI(this);
         ui.setMenu(loader.load());
         ui.run();
@@ -25,6 +25,7 @@ public class UIController {
     public UIController(TrackingSystem tracker) {
         this.tracker = tracker;
         loader = new MenuOptionsLoader();
+        this.logger = new Logger();
         ui = new ConsoleUI(this);
         ui.setMenu(loader.load());
         ui.run();
@@ -41,21 +42,26 @@ public class UIController {
                 ui.stop();
                 break;
             case "login1":
-                System.out.println("Authenticating user[scientist]...");
+                ui.printData("Authenticating user[Scientist]...");
                 //authenticate user
-                System.out.println("Logged in as scientist");
+                System.out.println("Logged in as [Scientist]");
+                logger.update(Action.LOGIN, "user");
                 ui.scientistMenu();
                 break;
             case "login2":
+                ui.printData("Authenticating user[Representative]...");
+                //authenticate user
+                System.out.println("Logged in as [Representative]");
                 ui.representativeMenu();
                 break;
             case "login3":
                 //ui.policymakerMenu();
+                ui.loginMenu();
                 break;
             case "login4":
                 System.out.println("authenticating user[Admin]...");
                 //authenticate user
-                System.out.println("Logged in as admin");
+                System.out.println("Logged in as [Admin]");
                 ui.adminMenu();
                 break;
             case "login0":
@@ -142,6 +148,9 @@ public class UIController {
                 ui.adminMenu();
                 break;
             }
+            case "create0":
+                ui.adminMenu();
+                break;
             case "update1", "update2": {
                 String field = "";
                 switch (input) {
