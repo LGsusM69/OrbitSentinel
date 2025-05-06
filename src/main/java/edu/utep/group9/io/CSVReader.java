@@ -29,7 +29,7 @@ public class CSVReader {
         file = new File("data/rso_metrics.csv");
         this.reader = new FileReader(file);
     }
-    /*This method parses the csv file and builds the data list.
+    /**This method parses the csv file and builds the data list.
     IOException may be thrown if the data file is in "UTF-8 with BOM"
      */
     public void buildData() throws IOException {
@@ -53,16 +53,16 @@ public class CSVReader {
                     .avgLongitude(Double.parseDouble(record.get("avg_longitude")))
                     .geoHash(record.get("geohash"))
                     .hrrCategory(record.get("HRR_Category"))
-                    .isNominated(Boolean.getBoolean(record.get("is_nominated")))
+                    .isNominated(Boolean.parseBoolean(record.get("is_nominated")))
                     .nominatedAt(record.get("nominated_at").isBlank() ? null : Timestamp.valueOf(record.get("nominated_at")))
-                    .hasDosier(Boolean.getBoolean(record.get("has_dossier")))
+                    .hasDosier(Boolean.parseBoolean(record.get("has_dossier")))
                     .lastUpdatedAt(record.get("last_updated_at").isBlank() ?
                             null : Timestamp.valueOf(record.get("last_updated_at")))
                     .justification(record.get("justification"))
                     .focusedAnalysis(record.get("focused_analysis"))
                     .daysOld(Integer.parseInt(record.get("days_old")))
                     .conjunctionCount(Long.parseLong(record.get("conjunction_count")))
-                    .isUnkObject(Boolean.getBoolean(record.get("is_unk_object")));
+                    .isUnkObject(Boolean.parseBoolean(record.get("is_unk_object")));
             data.add(object);
         }
     }

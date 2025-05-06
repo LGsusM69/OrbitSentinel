@@ -1,4 +1,3 @@
-*work on uicontroller admin functions
 
 *work on logger
 

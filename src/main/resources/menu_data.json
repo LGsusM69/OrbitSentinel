@@ -5,7 +5,9 @@
   ],
   "login": [
     {"label":  "Scientist", "value": 1},
-    {"label": "Admin", "value": 2},
+    {"label": "Space Agency Representative", "value": 2},
+    {"label": "Policymaker", "value": 3},
+    {"label": "Admin", "value": 4},
     {"label": "Back", "value": 0}
   ],
   "scientist": [
@@ -42,7 +44,8 @@
   "update": [
     {"label": "Change username", "value": 1},
     {"label": "Change password", "value": 2},
-    {"label": "Change type", "value": 3}
+    {"label": "Change type", "value": 3},
+    {"label": "Cancel", "value": 0}
   ],
   "type": [
     {"label": "Scientist", "value": 1},
@@ -50,5 +53,14 @@
     {"label": "Policymaker", "value": 3},
     {"label": "Administrator", "value": 4},
     {"label": "Cancel", "value": 0}
+  ],
+  "delete": [
+    {"label": "Yes", "value": 1},
+    {"label": "No", "value": 2}
+  ],
+  "representative": [
+    {"label": "Analyze long term impact", "value": 1},
+    {"label": "Generate demsity reports", "value": 2},
+    {"label": "Back", "value": 0}
   ]
 }

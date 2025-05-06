@@ -1,6 +1,6 @@
 package edu.utep.group9;
 
-import edu.utep.group9.controllers.ScientistController;
+import edu.utep.group9.controllers.TrackingSystem;
 import edu.utep.group9.controllers.UIController;
 import edu.utep.group9.io.CSVReader;
 
@@ -14,7 +14,6 @@ public class RunSimulation {
         CSVReader reader = null;
         try {
             reader = new CSVReader();
-            reader.buildData();
         } catch (FileNotFoundException e) {
             //throw new RuntimeException(e);
         } catch (IOException e) {
@@ -25,6 +24,6 @@ public class RunSimulation {
         try{
             //CSVWriter.writeCSVFile(reader.getObjects(),"data/calamardo.csv");
         } catch(Exception e) {e.printStackTrace();}
-        UIController uiControl = new UIController(new ScientistController(reader));
+        UIController uiControl = new UIController(new TrackingSystem(reader));
     }
 }

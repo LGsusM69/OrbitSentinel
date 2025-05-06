@@ -165,4 +165,21 @@ public class ConsoleUI {
             System.out.println("\t" + option.getValue() + ") " + option.getLabel());
         }
     }
+    public void delete(String user) {
+        state = "delete";
+        String[] fields = user.split(",");
+        System.out.println("User found:\n" +
+                "Username: " + fields[0] + " type: " + fields[2] +
+                "\n Sure you want to delete? ");
+        for (Menu option : menu.get("delete")) {
+            System.out.println("\t" + option.getValue() + ") " + option.getLabel());
+        }
+    }
+    public void representativeMenu() {
+        state = "representative";
+        System.out.println("username [type]\n Select an option:");
+        for (Menu option : menu.get("representative")) {
+            System.out.println("\t" + option.getValue() + ") " + option.getLabel());
+        }
+    }
 }

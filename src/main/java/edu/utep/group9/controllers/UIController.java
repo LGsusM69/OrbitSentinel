@@ -5,15 +5,25 @@ import edu.utep.group9.util.MenuOptionsLoader;
 import edu.utep.group9.view.ConsoleUI;
 
 public class UIController {
-
     MenuOptionsLoader loader;
-    ScientistController scientist;
+    TrackingSystem tracker;
     AdminController admin;
+    RepController rep;
     ConsoleUI ui;
     String data;
 
-    public UIController(ScientistController scientist) {
-        this.scientist = scientist;
+    public UIController() {
+        this.admin = new AdminController();
+        this.tracker = new TrackingSystem();
+        this.rep = new RepController();
+        loader = new MenuOptionsLoader();
+        ui = new ConsoleUI(this);
+        ui.setMenu(loader.load());
+        ui.run();
+    }
+
+    public UIController(TrackingSystem tracker) {
+        this.tracker = tracker;
         loader = new MenuOptionsLoader();
         ui = new ConsoleUI(this);
         ui.setMenu(loader.load());
@@ -37,6 +47,12 @@ public class UIController {
                 ui.scientistMenu();
                 break;
             case "login2":
+                ui.representativeMenu();
+                break;
+            case "login3":
+                //ui.policymakerMenu();
+                break;
+            case "login4":
                 System.out.println("authenticating user[Admin]...");
                 //authenticate user
                 System.out.println("Logged in as admin");
@@ -55,30 +71,30 @@ public class UIController {
                 ui.mainMenu();
                 break;
             case "track-space1":
-                ui.printData(scientist.track("ROCKET BODY", "ALL"));
+                ui.printData(tracker.track("ROCKET BODY", "ALL"));
                 ui.trackSpaceMenu();
                 break;
             case "track-space2":
-                ui.printData(scientist.track("DEBRIS", "ALL"));
+                ui.printData(tracker.track("DEBRIS", "ALL"));
                 ui.trackSpaceMenu();
                 break;
             case "track-space3":
-                ui.printData(scientist.track("PAYLOAD", "ALL"));
+                ui.printData(tracker.track("PAYLOAD", "ALL"));
                 ui.trackSpaceMenu();
                 break;
             case "track-space4":
-                ui.printData(scientist.track("UNKNOWN", "ALL"));
+                ui.printData(tracker.track("UNKNOWN", "ALL"));
                 ui.trackSpaceMenu();
                 break;
             case "track-space0":
                 ui.scientistMenu();
                 break;
             case "assess-orbit1":
-                ui.printData(scientist.track("ALL", "LEO"));
+                ui.printData(tracker.track("ALL", "LEO"));
                 ui.assessOrbitMenu();
                 break;
             case "assess-orbit2":
-                if(scientist.assessDebre())
+                if(tracker.assessDebre())
                     ui.printData("Data updated, report file created");
                 ui.assessOrbitMenu();
                 break;
@@ -101,9 +117,18 @@ public class UIController {
                     break;
                 }
             }
-            case "admin3":
-                //delete user
+            case "admin3": {
+                String username = ui.promptUser("Enter a username:");
+                String user = AdminController.validateUsername(username);
+                if(!user.equals("")) {
+                    data = user;
+                    ui.delete(user);
+                } else {
+                    System.out.println("User not found");
+                    ui.adminMenu();
+                }
                 break;
+            }
             case "admin0":
                 ui.mainMenu();
                 break;
@@ -132,13 +157,46 @@ public class UIController {
             case "update3":
                 ui.typeMenu(data);
                 break;
-            case "type1", "type2", "type3": {
-                System.out.println("roastbeef: " + data);
+            case "update0":
+                ui.adminMenu();
+                break;
+            case "type1", "type2", "type3", "type4": {
                 String statuss = AdminController.updateType(data, input);
                 ui.printData(statuss);
                 ui.adminMenu();
                 break;
             }
+            case "delete1":
+                AdminController.delete(data);
+                ui.printData("User deleted");
+                ui.adminMenu();
+                break;
+            case "delete2":
+                ui.printData("Deletion aborted");
+                ui.adminMenu();
+                break;
+            case "representative1":
+                ui.printData("Long term impact:");
+                ui.printData(tracker.analyzeImpact());
+                ui.representativeMenu();
+                break;
+            case "representative2":
+                ui.printData("Setting longitude range.");
+                double lower = Double.valueOf(ui.promptUser("Enter lower bound:"));
+                double upper = Double.valueOf(ui.promptUser("Enter upper bound:"));
+                String data = tracker.densityReport(lower, upper);
+                int index = data.indexOf('\n');
+                String count = data.substring(0, index);
+                data = data.substring(index+1);
+                ui.printData("There are " + count + " objects in orbit\n" +
+                        "in the range specified[" + lower + " - " + upper +
+                        "]:");
+                ui.printData(data);
+                ui.representativeMenu();
+                break;
+            case "representative0":
+                ui.mainMenu();
+                break;
         }
     }
 }

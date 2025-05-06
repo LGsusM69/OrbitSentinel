@@ -49,6 +49,11 @@ public class AdminController {
         boolean success = UserManager.updateUser(data, "type", newType);
         return success ? "User type updated." : "Update failed.";
     }
+    public static String delete(String data) {
+        boolean success = UserManager.deleteUser(data);
+        return success ? "User deleted successfully." : "Delete failed.";
+    }
+
 
 
 }

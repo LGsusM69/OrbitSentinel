@@ -81,6 +81,38 @@ public class UserManager {
         return true;
     }
 
+    public static boolean deleteUser(String data) {
+        File file = new File("data/users.csv");
+        File tempFile = new File("data/users_temp.csv");
+
+        boolean deleted = false;
+
+        try (BufferedReader br = new BufferedReader(new FileReader(file));
+             BufferedWriter bw = new BufferedWriter(new FileWriter(tempFile))) {
+
+            String line;
+            while ((line = br.readLine()) != null) {
+                if (line.equals(data)) {
+                    deleted = true; // Skip writing this line
+                    continue;
+                }
+                bw.write(line);
+                bw.newLine();
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+
+        if (!file.delete() || !tempFile.renameTo(file)) {
+            return false;
+        }
+
+        return deleted;
+    }
+
+
 
     public static User getByUsername(String username) {
         File file = new File("data/users.csv");

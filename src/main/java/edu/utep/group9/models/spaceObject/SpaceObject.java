@@ -244,12 +244,14 @@ public abstract class SpaceObject {
                 satelliteName + ", " +
                 country + ", " +
                 aproximateOrbitType + ", " +
+                objectType + ", " +
                 launchYear + ", " +
                 launchSite + ", " +
                 String.format("%.5f", longitude) + ", " +
                 String.format("%.5f", avgLongitude) + ", " +
                 geoHash + ", " +
-                daysOld;
+                daysOld + ", " +
+                conjunctionCount;
     }
     public String toStringWithOrbitAssessment() {
         return toString() + ", " + Boolean.toString(stillInOrbit) + ", " + riskLevel;
