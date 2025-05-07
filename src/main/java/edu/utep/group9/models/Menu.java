@@ -1,7 +1,12 @@
 package edu.utep.group9.models;
 
+/**
+ * This object represent an option in the menu of the UI.
+ */
 public class Menu {
+    /**Name of the menu option*/
     private String label;
+    /** The value of the option in the UI.*/
     private int value;
 
     public String getLabel() { return label; }

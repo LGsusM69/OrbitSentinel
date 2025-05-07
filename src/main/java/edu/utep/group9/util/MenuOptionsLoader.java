@@ -8,6 +8,9 @@ import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
 
+/** This class loads the menu options as Menu objects from a json file.
+ * It returns the objects in a Hashmap.
+ */
 public class MenuOptionsLoader {
 
     public HashMap<String, List<Menu>> load() {

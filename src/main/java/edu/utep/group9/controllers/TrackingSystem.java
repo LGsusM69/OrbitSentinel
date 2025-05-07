@@ -8,7 +8,14 @@ import edu.utep.group9.models.spaceObject.SpaceObject;
 import java.io.IOException;
 import java.util.*;
 
+/**
+ * Performs operations on SpaceObjects.
+ * Creates collections of this objects, filters them and returns them.
+ * It also calls methods on other objects that write files with reports.
+ */
 public class TrackingSystem {
+    /**reader holds an instance of a CSVReader object which is used to
+     * create spaceObjects from csv files.*/
     CSVReader reader;
 
     public TrackingSystem() {

@@ -2,7 +2,7 @@ package edu.utep.group9.models.spaceObject;
 
 import java.sql.Timestamp;
 
-/*This abstract class models all space objects in the data.
+/**This abstract class models all space objects in the data.
  *This is a fluent interface. All the setter methods return
  * the instance of a subtype.
  */

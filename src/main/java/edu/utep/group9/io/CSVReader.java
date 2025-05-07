@@ -4,33 +4,38 @@ import edu.utep.group9.models.spaceObject.SpaceObject;
 import edu.utep.group9.models.spaceObject.SpaceObjectFactory;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
+import org.apache.commons.io.input.BOMInputStream;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.sql.Timestamp;
 import java.util.HashSet;
 import java.util.Set;
 
-/**This class parses csv files, creates a list of SpaceObjeecs
+/**
+ * This class parses CSV files, creates a list of SpaceObjects,
  * and returns the list.
  */
 public class CSVReader {
-    
     
     private File file;
     private Reader reader;
     private Set<SpaceObject> data;
     private Iterable<CSVRecord> records;
-
+    
     /* The constructor may throw an exception.
-    To be handled by the client class.
+       To be handled by the client class.
      */
-    public CSVReader() throws NullPointerException, FileNotFoundException {
-        
+    public CSVReader() throws IOException {
         file = new File("data/rso_metrics.csv");
-        this.reader = new FileReader(file);
+        InputStream input = new FileInputStream(file);
+        BOMInputStream bomInput = new BOMInputStream(input);
+        this.reader = new InputStreamReader(bomInput, StandardCharsets.UTF_8);
     }
-    /**This method parses the csv file and builds the data list.
-    IOException may be thrown if the data file is in "UTF-8 with BOM"
+    
+    /**
+     * This method parses the CSV file and builds the data list.
+     * IOException may be thrown if the data file is unreadable.
      */
     public void buildData() throws IOException {
         data = new HashSet<>();
@@ -39,7 +44,7 @@ public class CSVReader {
                 .withTrim()
                 .parse(reader);
         this.records = records;
-        for(CSVRecord record : records) {
+        for (CSVRecord record : records) {
             SpaceObject object = SpaceObjectFactory.getSpaceObject(record.get("object_type"));
             object.recordId(record.get("record_id"))
                     .noradCatID(record.get("norad_cat_id"))
@@ -66,6 +71,7 @@ public class CSVReader {
             data.add(object);
         }
     }
+    
     public HashSet<SpaceObject> getObjects() {
         return new HashSet<>(this.data);
     }

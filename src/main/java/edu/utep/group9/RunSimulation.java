@@ -7,6 +7,10 @@ import edu.utep.group9.io.CSVReader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+/**
+ * Main entry point of the system.
+ * Instanciates required controllers and runs the main method.
+ */
 public class RunSimulation {
     public static void main(String[] args) {
 
@@ -22,7 +26,6 @@ public class RunSimulation {
             e.printStackTrace();
         }
         try{
-            //CSVWriter.writeCSVFile(reader.getObjects(),"data/calamardo.csv");
         } catch(Exception e) {e.printStackTrace();}
         UIController uiControl = new UIController(new TrackingSystem(reader));
     }

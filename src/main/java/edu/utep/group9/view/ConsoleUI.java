@@ -42,12 +42,18 @@ public class ConsoleUI {
             if(isValidInput(input)) uiControl.handleInput(state, input);
         }
     }
+    
+    /**
+     * Stops the main loop of the user interface
+     */
     public void stop() {
         running = false;
     }
-
-    /*Prompts user for input and validates it
-    before proceding.
+    
+    /**
+     * Flushes the scanner if needed and
+     * takes input from the default system in.
+     * @return user input.
      */
     private int getInput() {
         int input = -1;
@@ -63,7 +69,12 @@ public class ConsoleUI {
         System.out.println(prompt);
         return sc.nextLine();
     }
-
+    
+    /** Makes sure that the input is a valid choice
+     * in the UI or returns the user to the same menu.
+     * @param input user input.
+     * @return true if input is valid.
+     */
     private boolean isValidInput(int input) {
         List<Menu> options = menu.get(state);
         for (Menu option : options) {

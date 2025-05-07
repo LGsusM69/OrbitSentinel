@@ -1,5 +1,8 @@
 package edu.utep.group9.models.user;
 
+/** This model represents a user in the system.
+ * Holds basic user information.
+ */
 public abstract class User {
     private String username;
     private String password; // In a real system, use hashed passwords

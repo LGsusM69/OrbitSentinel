@@ -5,7 +5,7 @@ import edu.utep.group9.models.user.User.Type;
 import static edu.utep.group9.models.user.User.Type.*;
 
 /**This class builds a subtype of User.
- *
+ * It returns the required user.
  */
 public class UserFactory {
     

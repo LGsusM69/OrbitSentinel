@@ -5,6 +5,9 @@ import edu.utep.group9.models.user.UserFactory;
 
 import java.io.*;
 
+/** Performs crud operations on User objects, validates passwords.
+ *
+ */
 public class UserManager {
 
     public static boolean createUser(User user) {
