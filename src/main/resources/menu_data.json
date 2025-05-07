@@ -5,9 +5,9 @@
   ],
   "login": [
     {"label":  "Scientist", "value": 1},
-    {"label": "Space Agency Representative", "value": 2},
+    {"label": "Space_Agency_Representative", "value": 2},
     {"label": "Policymaker", "value": 3},
-    {"label": "Admin", "value": 4},
+    {"label": "Administrator", "value": 4},
     {"label": "Back", "value": 0}
   ],
   "scientist": [

@@ -20,6 +20,12 @@ public abstract class User {
         this.password = password;
         this.type = type;
     }
+    public boolean comparePasswords(String password) {
+        return password.equals(this.password);
+    }
+    public String toString() {
+        return username + "," + type.toString();
+    }
 
     // Getters
     public String getUsername() {
@@ -50,8 +56,5 @@ public abstract class User {
         this.type = type;
     }
 
-    public String toString() {
-        return username + "," + password + "," + type.toString();
-    }
 }
 

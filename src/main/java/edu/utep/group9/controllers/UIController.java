@@ -2,6 +2,7 @@ package edu.utep.group9.controllers;
 
 import edu.utep.group9.io.Logger;
 import edu.utep.group9.io.Logger.Action;
+import edu.utep.group9.io.UserManager;
 import edu.utep.group9.models.user.User;
 import edu.utep.group9.util.MenuOptionsLoader;
 import edu.utep.group9.view.ConsoleUI;
@@ -10,8 +11,11 @@ public class UIController {
     MenuOptionsLoader loader;
     TrackingSystem tracker;
     ConsoleUI ui;
+    String choice;
     String data;
     Logger logger;
+    String username;
+    String type;
 
     public UIController() {
         this.tracker = new TrackingSystem();
@@ -41,29 +45,59 @@ public class UIController {
                 System.out.println("Exiting...");
                 ui.stop();
                 break;
-            case "login1":
-                ui.printData("Authenticating user[Scientist]...");
-                //authenticate user
-                System.out.println("Logged in as [Scientist]");
-                logger.update(Action.LOGIN, "user");
+            case "login1": {
+                String error = login(choice);
+                if(!error.equals("")) {
+                    error = "Failed to login: " + error;
+                    ui.printData(error);
+                    ui.loginMenu();
+                    break;
+                }
+                System.out.println("[" + username + "] Logged in as [" + type + "]");
+                logger.login(username);
                 ui.scientistMenu();
                 break;
-            case "login2":
-                ui.printData("Authenticating user[Representative]...");
-                //authenticate user
-                System.out.println("Logged in as [Representative]");
+            }
+            case "login2": {
+                String error = login(choice);
+                if(!error.equals("")) {
+                    error = "Failed to login: " + error;
+                    ui.printData(error);
+                    ui.loginMenu();
+                    break;
+                }
+                System.out.println("[" + username + "] Logged in as [" + type + "]");
+                logger.login(username);
                 ui.representativeMenu();
                 break;
-            case "login3":
-                //ui.policymakerMenu();
+            }
+            case "login3": {
+                /*String error = login(choice);
+                if(!error.equals("")) {
+                    error = "Failed to login: " + error;
+                    ui.printData(error);
+                    ui.loginMenu();
+                    break;
+                }
+                System.out.println("[" + username + "] Logged in as [" + type + "]");
+                logger.update(Action.LOGIN, username);
+                //ui.policymakerMenu();*/
                 ui.loginMenu();
                 break;
-            case "login4":
-                System.out.println("authenticating user[Admin]...");
-                //authenticate user
-                System.out.println("Logged in as [Admin]");
+            }
+            case "login4": {
+                String error = login(choice);
+                if(!error.equals("")) {
+                    error = "Failed to login: " + error;
+                    ui.printData(error);
+                    ui.loginMenu();
+                    break;
+                }
+                System.out.println("[" + username + "] Logged in as [" + type + "]");
+                logger.login(username);
                 ui.adminMenu();
                 break;
+            }
             case "login0":
                 ui.mainMenu();
                 break;
@@ -75,21 +109,30 @@ public class UIController {
                 break;
             case "scientist0":
                 ui.mainMenu();
+                logger.logout(username);
                 break;
             case "track-space1":
                 ui.printData(tracker.track("ROCKET BODY", "ALL"));
+                Logger.readFile(username, "rso_metrics.csv");
+                Logger.queryData(username, "ROCKET BODY", "ALL");
                 ui.trackSpaceMenu();
                 break;
             case "track-space2":
                 ui.printData(tracker.track("DEBRIS", "ALL"));
+                Logger.readFile(username, "rso_metrics.csv");
+                Logger.queryData(username, "DEBRIS", "ALL");
                 ui.trackSpaceMenu();
                 break;
             case "track-space3":
                 ui.printData(tracker.track("PAYLOAD", "ALL"));
+                Logger.readFile(username, "rso_metrics.csv");
+                Logger.queryData(username, "PAYLOAD", "ALL");
                 ui.trackSpaceMenu();
                 break;
             case "track-space4":
                 ui.printData(tracker.track("UNKNOWN", "ALL"));
+                Logger.readFile(username, "rso_metrics.csv");
+                Logger.queryData(username,"UNKNOWN", "ALL");
                 ui.trackSpaceMenu();
                 break;
             case "track-space0":
@@ -97,11 +140,18 @@ public class UIController {
                 break;
             case "assess-orbit1":
                 ui.printData(tracker.track("ALL", "LEO"));
+                Logger.readFile(username, "rso_metrics.csv");
+                Logger.queryData(username,"ALL", "LEO");
                 ui.assessOrbitMenu();
                 break;
             case "assess-orbit2":
-                if(tracker.assessDebre())
+                if(tracker.assessDebre()) {
                     ui.printData("Data updated, report file created");
+                    Logger.readFile(username, "rso_metrics.csv");
+                    Logger.queryData(username,"DEBRIS", "IN ORBIT");
+                    Logger.generateData(username, "orbit-statuss-report.txt");
+                    Logger.generateData(username, "data-out.csv");
+                }
                 ui.assessOrbitMenu();
                 break;
             case "assess-orbit0":
@@ -136,6 +186,7 @@ public class UIController {
                 break;
             }
             case "admin0":
+                logger.logout(username);
                 ui.mainMenu();
                 break;
             case "create1", "create2", "create3", "create4": {
@@ -204,8 +255,21 @@ public class UIController {
                 ui.representativeMenu();
                 break;
             case "representative0":
+                logger.logout(username);
                 ui.mainMenu();
                 break;
         }
     }
+    private String login(String type) {
+        String username = ui.promptUser("Enter your username:");
+        String password = ui.promptUser("Enter your password:");
+        String[] user = UserManager.authenticate(username, password, type).split(",");
+        if(user.length > 1) {
+            this.username = username;
+            this.type = type;
+            return "";
+        }
+        return user[0];
+    }
+    public void setChoice(String choice){this.choice = choice;}
 }

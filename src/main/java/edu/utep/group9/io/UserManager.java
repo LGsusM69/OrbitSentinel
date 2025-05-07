@@ -139,4 +139,11 @@ public class UserManager {
 
         return null; // user not found
     }
+    public static String authenticate(String username, String password, String type) {
+        User user = getByUsername(username);
+        if(user == null) return "Invalid username.";
+        if(!user.getType().toString().equalsIgnoreCase(type))return "Wrong user type.";
+        if(!user.comparePasswords(password)) return "Username and password do not match.";
+        return user.toString(); // returns "username,type"
+    }
 }

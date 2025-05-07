@@ -67,7 +67,8 @@ public class ConsoleUI {
     private boolean isValidInput(int input) {
         List<Menu> options = menu.get(state);
         for (Menu option : options) {
-            if (option.getValue() == input) {
+            if(option.getValue() == input) {
+                uiControl.setChoice(option.getLabel());
                 return true;
             }
         }
