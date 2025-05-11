@@ -10,8 +10,8 @@ import java.util.*;
  * Uses the default System input and output.
  * then it delegates actions to the controller.*/
 public class ConsoleUI {
-    UIController uiControl;
-    String data;
+    private UIController uiControl;
+    private String data;
 
     private Scanner sc;
     private boolean running;
@@ -164,9 +164,11 @@ public class ConsoleUI {
     public void update(String user) {
         state = "update";
         data = user;
+        System.out.println("calamardo: " + user);
         String[] data = user.split(",");
+        System.out.println("don cangrejo: " + data.length);
         System.out.println("Modifying user: " + data[0] + "\n" +
-                "type: " + data[2]);
+                "type: " + data[1]);
         for (Menu option : menu.get("update")) {
             System.out.println("\t" + option.getValue() + ") " + option.getLabel());
         }

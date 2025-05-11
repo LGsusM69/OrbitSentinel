@@ -26,7 +26,7 @@ public class Logger {
     
     private static void writeLog(String log) {
         try(BufferedWriter writer = new BufferedWriter(
-                new FileWriter("data/system-log.txt")
+                new FileWriter("data/system-log.txt", true)
         )){
             writer.write(log);
             
